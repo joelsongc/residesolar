@@ -1,25 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Docs</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+    <meta charset="UTF-8">
+    <title>Redirecionando...</title>
 
-    <meta http-equiv="refresh"
-        content="0; url=https://wa.me/5518997327051?text=Olá!%20Informamos%20há%20encomenda,%20correspondência%20ou%20documento%20para%20você%20na%20portaria%20do%20Residencial%20Solar%20das%20Palmeiras.%20No%20caso%20de%20encomendas,%20deverá%20ser%20retirar%20o%20quanto%20antes." />
+    <script>
+        // Tabela de números por apartamento
+        const moradores = {
+            "101": "5518997327051",
+            "102": "5518997999418",
+            "103": "5518997457306",
+            "104": "5511999990004",
+            // ... e assim por diante até o 174
+        };
 
+        // Obtém parâmetro ?apt=101
+        const params = new URLSearchParams(window.location.search);
+        const apto = params.get("apt");
+
+        // Mensagem pré-preenchida
+        const mensagem = encodeURIComponent(
+            "Olá! Informamos há encomenda, correspondência ou documento para você na portaria do Residencial Solar das Palmeiras. No caso de encomendas, deverá ser retirar o quanto antes."
+        );
+
+        // Se existir número cadastrado → redireciona
+        if (moradores[apto]) {
+            const numero = moradores[apto];
+            const url = `https://wa.me/${numero}?text=${mensagem}`;
+            window.location.href = url;
+        }
+        else {
+            document.write(`<h2>Apartamento ${apto} não encontrado!</h2>`);
+        }
+    </script>
 
 </head>
 
 <body>
-    <center>
-        <h1>Docs Private</h1>
-        <p>Sistema privado</p>
-    </center>
 </body>
 
 </html>
